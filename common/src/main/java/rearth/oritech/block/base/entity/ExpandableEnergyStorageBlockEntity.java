@@ -94,7 +94,7 @@ public abstract class ExpandableEnergyStorageBlockEntity extends NetworkedBlockE
     public void serverTick(Level world, BlockPos pos, BlockState state, NetworkedBlockEntity blockEntity) {
         if (world.isClientSide) return;
         
-        energyStorage.tick((int) world.getGameTime());
+        energyStorage.tick(world.getGameTime());
         
         if (!redstonePowered)
             outputEnergy();

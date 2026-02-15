@@ -44,7 +44,7 @@ public class DynamicStatisticEnergyStorage extends DynamicEnergyStorage {
     }
     
     public void tick(long worldTicks) {
-        var index = (int) (worldTicks % 20);
+        var index = (int) ((worldTicks % 20 + 20) % 20);
         historicInsert[index] = inserted.stream().mapToLong(Long::longValue).sum();
         historicExtract[index] = extracted.stream().mapToLong(Long::longValue).sum();
         currentInsertSources = inserted.size();
@@ -54,7 +54,7 @@ public class DynamicStatisticEnergyStorage extends DynamicEnergyStorage {
     }
     
     public EnergyStatistics getCurrentStatistics(long worldTicks) {
-        var index = (int) (worldTicks % 20);
+        var index = (int) ((worldTicks % 20 + 20) % 20);
         
         return new EnergyStatistics(
           (float) Arrays.stream(historicInsert).mapToLong(Long::longValue).average().orElse(0),
